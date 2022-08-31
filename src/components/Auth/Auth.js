@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
+import s from './Auth.module.css';
 import { NavLink } from 'react-router-dom';
-import s from './AuthNav.module.css';
 
-export const getLinkClassName = props => {
+const getLinkClassName = props => {
   const { isActive } = props;
   return isActive ? s.activeLink : s.link;
 };
@@ -16,6 +17,9 @@ const AuthNav = () => {
       </NavLink>
     </div>
   );
+};
+getLinkClassName.propTypes = {
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default AuthNav;

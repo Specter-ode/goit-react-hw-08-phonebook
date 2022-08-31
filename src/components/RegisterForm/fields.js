@@ -9,6 +9,7 @@ export const fields = {
     label: 'Email',
     name: 'email',
     type: 'email',
+
     required: true,
   },
   password: {
@@ -16,5 +17,6 @@ export const fields = {
     name: 'password',
     type: 'password',
     required: true,
+    placeholder: 'min 7 symbols',
   },
 };

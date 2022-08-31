@@ -12,15 +12,26 @@ const initialState = {
 };
 
 const LoginForm = ({ onSubmitClick }) => {
-  const { state, handleChange, handleSubmit } = useForm({ onSubmitClick, initialState });
+  const { state, handleChange, handleSubmit } = useForm({
+    onSubmitClick,
+    initialState,
+  });
 
   const { email, password } = state;
   const isActive = email && password;
   return (
     <Section title="Login form">
       <form className={s.form} onSubmit={handleSubmit}>
-        <FormTextField value={email} onChange={handleChange} {...fields.email} />
-        <FormTextField value={password} onChange={handleChange} {...fields.password} />
+        <FormTextField
+          value={email}
+          onChange={handleChange}
+          {...fields.email}
+        />
+        <FormTextField
+          value={password}
+          onChange={handleChange}
+          {...fields.password}
+        />
         <button type="submit" disabled={!isActive} className={s.btn}>
           Submit
         </button>

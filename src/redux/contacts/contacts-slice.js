@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, removeContact, fetchContacts } from './contacts-operations';
+import {
+  addContact,
+  removeContact,
+  fetchContacts,
+} from './contacts-operations';
 
 const initialState = {
   items: [],
@@ -39,11 +43,13 @@ const contactsSlice = createSlice({
       loading: true,
       error: null,
     }),
-    [addContact.fulfilled]: (store, { payload }) => ({
-      ...store,
-      items: [payload, ...store.items],
-      loading: false,
-    }),
+    [addContact.fulfilled]: (store, { payload }) => {
+      return {
+        ...store,
+        items: [payload, ...store.items],
+        loading: false,
+      };
+    },
     [addContact.rejected]: (store, { payload }) => ({
       ...store,
       loading: false,
@@ -57,7 +63,7 @@ const contactsSlice = createSlice({
     }),
     [removeContact.fulfilled]: (store, { payload }) => ({
       ...store,
-      items: store.items.filter(item => item.id !== payload.id),
+      items: store.items.filter(item => item.id !== payload),
       loading: false,
     }),
     [removeContact.rejected]: (store, { payload }) => ({
@@ -67,5 +73,5 @@ const contactsSlice = createSlice({
     }),
   },
 });
-export const { filterChange } = contactsSlice.actions;
+export const { filterChange, addToFavoriteContacts } = contactsSlice.actions;
 export default contactsSlice.reducer;

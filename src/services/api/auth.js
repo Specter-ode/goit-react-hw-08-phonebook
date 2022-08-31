@@ -19,7 +19,6 @@ export const register = async data => {
 
 export const login = async data => {
   const result = await instance.post('/users/login', data);
-  console.log('login result: ', result.data);
   setToken(result.data.token);
 
   return result.data;
@@ -27,8 +26,19 @@ export const login = async data => {
 
 export const logout = async data => {
   const result = await instance.post('/users/logout', data);
-  console.log('logout result: ', result);
+  setToken('');
   return result.data;
+};
+
+export const getCurrentUser = async token => {
+  try {
+    setToken(token);
+    const result = await instance.get('/users/current');
+    return result.data;
+  } catch (error) {
+    setToken('');
+    throw error;
+  }
 };
 
 export default instance;

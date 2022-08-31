@@ -1,19 +1,17 @@
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { isLogin } from 'redux/auth/auth-selector';
 import Navigation from '../Navigation/Navigation';
 import UserMenu from '../UserMenu/UserMenu';
-import AuthNav from '../AuthNav/AuthNav';
-// import { authSelectors } from '../../redux/auth';
+import Auth from '../Auth/Auth';
 import s from './Header.module.css';
 
 const Header = () => {
-  //   const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
+  const isAuth = useSelector(isLogin);
 
   return (
     <header className={s.header}>
-      <Navigation />
-      <UserMenu />
-      <AuthNav />
-      {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
+      <Navigation isAuth={isAuth} />
+      {isAuth ? <UserMenu /> : <Auth />}
     </header>
   );
 };

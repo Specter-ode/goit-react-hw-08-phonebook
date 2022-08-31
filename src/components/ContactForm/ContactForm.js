@@ -1,61 +1,28 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
+import { fields } from './fields';
+import useForm from '../../services/hooks/useForm';
+import FormTextField from 'components/FormTextField/FormTextField';
 
-const ContactForm = ({ catchSubmitInfo }) => {
-  const [state, setState] = useState({
-    name: '',
-    number: '',
+const initialState = {
+  name: '',
+  number: '',
+};
+const ContactForm = ({ onSubmitClick }) => {
+  const { state, handleChange, handleSubmit } = useForm({
+    onSubmitClick,
+    initialState,
   });
-  const clearFields = () => {
-    setState({
-      name: '',
-      number: '',
-    });
-  };
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setState(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  const handleSubmit = e => {
-    e.preventDefault();
-    catchSubmitInfo({ ...state });
-
-    clearFields();
-  };
   const { name, number } = state;
-  const isActive = name && number;
+  const isActive = name && number.length > 6;
   return (
     <form onSubmit={handleSubmit} className={s.form}>
-      <label className={s.label}>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          onChange={handleChange}
-          className={s.input}
-        />
-        Name
-      </label>
-      <label className={s.label}>
-        <input
-          type="tel"
-          name="number"
-          value={number}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          onChange={handleChange}
-          className={s.input}
-        />
-        Phone number
-      </label>
-
+      <FormTextField value={name} onChange={handleChange} {...fields.name} />
+      <FormTextField
+        value={number}
+        onChange={handleChange}
+        {...fields.number}
+      />
       <button type="submit" disabled={!isActive} className={s.btn}>
         Add contact
       </button>
@@ -64,6 +31,6 @@ const ContactForm = ({ catchSubmitInfo }) => {
 };
 
 ContactForm.propTypes = {
-  catchSubmitInfo: PropTypes.func.isRequired,
+  onSubmitClick: PropTypes.func.isRequired,
 };
 export default ContactForm;

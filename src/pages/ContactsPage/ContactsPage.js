@@ -1,9 +1,16 @@
 import s from './ContactsPage.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts, removeContact, addContact } from '../../redux/contacts/contacts-operations';
+import {
+  fetchContacts,
+  removeContact,
+  addContact,
+} from '../../redux/contacts/contacts-operations';
 import { filterChange } from '../../redux/contacts/contacts-slice';
-import { getContacts, getFilterValue } from '../../redux/contacts/contacts-selectors';
+import {
+  getContacts,
+  getFilterValue,
+} from '../../redux/contacts/contacts-selectors';
 
 import Section from '../../components/Section/Section';
 import ContactForm from '../../components/ContactForm/ContactForm';
@@ -35,24 +42,29 @@ const ContactsPage = () => {
   const { items, loading, error, filter } = contacts;
 
   const getVisibleContacts = () => {
-    if (filter) {
-      const normalizedFilterValue = filter.toLowerCase().trim();
-      return items.filter(contact => contact.name.toLowerCase().includes(normalizedFilterValue));
-    }
-    return items;
+    const normalizedFilterValue = filter.toLowerCase().trim();
+    return items.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilterValue)
+    );
   };
   return (
     <main>
       <div className={s.container}>
         <Section title="Phonebook">
-          <ContactForm catchSubmitInfo={onAddContact} />
+          <ContactForm onSubmitClick={onAddContact} />
         </Section>
         <Section title="Contacts">
           {loading && <Spinner />}
           {items.length > 0 ? (
             <>
-              <Filter valueFromFilter={filterValue} catchFilterInfo={onChangeFilter} />
-              <ContactList contacts={getVisibleContacts()} removeContact={onRemoveContact} />
+              <Filter
+                valueFromFilter={filterValue}
+                catchFilterInfo={onChangeFilter}
+              />
+              <ContactList
+                contacts={getVisibleContacts()}
+                removeContact={onRemoveContact}
+              />
             </>
           ) : (
             <p>No contacts in phonebook</p>
