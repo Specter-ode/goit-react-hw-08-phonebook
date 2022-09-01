@@ -7,7 +7,6 @@ export const register = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const result = await api.register(data);
-      toast.success(`Register success.`);
       return result;
     } catch (error) {
       toast.error(`Sorry, Register failed. Try again.`);
@@ -19,7 +18,6 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {
     const result = await api.login(data);
-    toast.success('Login success!');
     return result;
   } catch (error) {
     toast.error(`Sorry, login failed. Check email and password. Try again.`);
@@ -32,7 +30,6 @@ export const logout = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const result = await api.logout(data);
-      toast.info('Logout success');
       return result;
     } catch (error) {
       toast.error(`Sorry, register failed. Try again.`);
