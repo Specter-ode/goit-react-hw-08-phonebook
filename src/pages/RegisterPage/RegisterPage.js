@@ -1,7 +1,5 @@
 import s from './RegisterPage.module.css';
-import { Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { isLogin } from 'redux/auth/auth-selector';
+import { useDispatch } from 'react-redux';
 
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { register } from '../../redux/auth/auth-operations';

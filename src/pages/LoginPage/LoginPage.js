@@ -1,6 +1,5 @@
 import s from './LoginPage.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { isLogin } from 'redux/auth/auth-selector';
+import { useDispatch } from 'react-redux';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import { login } from '../../redux/auth/auth-operations';
 const LoginPage = () => {
