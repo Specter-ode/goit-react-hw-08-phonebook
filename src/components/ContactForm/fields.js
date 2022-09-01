@@ -13,7 +13,7 @@ export const fields = {
     name: 'number',
     type: 'tel',
     required: true,
-    title:
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+    pattern: '^[0-9]{7,12}$',
+    title: 'Phone number must have only numbers. Length 7-12',
   },
 };
