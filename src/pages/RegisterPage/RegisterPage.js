@@ -7,14 +7,10 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { register } from '../../redux/auth/auth-operations';
 
 const RegisterPage = () => {
-  const isAuth = useSelector(isLogin);
   const dispatch = useDispatch();
 
   const onRegister = data => {
     dispatch(register(data));
-    if (isAuth) {
-      return <Navigate to="/contacts" />;
-    }
   };
   return (
     <main>

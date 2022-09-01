@@ -19,7 +19,11 @@ const authSlice = createSlice({
       loading: false,
       isLogin: true,
     }),
-    [register.rejected]: (store, { payload }) => ({ ...store, loading: false, error: payload }),
+    [register.rejected]: (store, { payload }) => ({
+      ...store,
+      loading: false,
+      error: payload,
+    }),
 
     [login.pending]: store => ({ ...store, loading: true, error: null }),
     [login.fulfilled]: (_, { payload }) => ({
@@ -28,17 +32,33 @@ const authSlice = createSlice({
       loading: false,
       isLogin: true,
     }),
-    [login.rejected]: (store, { payload }) => ({ ...store, loading: false, error: payload }),
+    [login.rejected]: (store, { payload }) => ({
+      ...store,
+      loading: false,
+      error: payload,
+    }),
 
     [logout.pending]: store => ({ ...store, loading: true, error: null }),
     [logout.fulfilled]: () => ({ ...initialState }),
-    [logout.rejected]: (store, { payload }) => ({ ...store, loading: false, error: payload }),
+    [logout.rejected]: (store, { payload }) => ({
+      ...store,
+      loading: false,
+      error: payload,
+    }),
 
-    [getCurrentUser.pending]: store => ({ ...store, loading: true, error: null }),
+    [getCurrentUser.pending]: store => ({
+      ...store,
+      loading: true,
+      error: null,
+    }),
     [getCurrentUser.fulfilled]: (store, { payload }) => {
       return { ...store, users: payload, loading: false, isLogin: true };
     },
-    [getCurrentUser.rejected]: (store, { payload }) => ({ ...store, loading: false, error: payload }),
+    [getCurrentUser.rejected]: (store, { payload }) => ({
+      ...store,
+      loading: false,
+      error: payload,
+    }),
   },
 });
 
