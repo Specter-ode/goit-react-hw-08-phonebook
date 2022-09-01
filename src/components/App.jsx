@@ -5,7 +5,7 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import Container from './Container/Container';
 import Header from './Header/Header';
 import Spinner from './Spinner/Spinner';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -46,7 +46,13 @@ const App = () => {
         </Routes>
       </Suspense>
 
-      <ToastContainer autoClose={3000} hideProgressBar />
+      <ToastContainer
+        autoClose={2000}
+        hideProgressBar
+        position="top-center"
+        theme="colored"
+        transition={Zoom}
+      />
     </Container>
   );
 };

@@ -1,13 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../../services/api/auth';
+import { toast } from 'react-toastify';
 
 export const register = createAsyncThunk(
   'auth/register',
   async (data, thunkAPI) => {
     try {
       const result = await api.register(data);
+      toast.success(`Register success.`);
       return result;
     } catch (error) {
+      toast.error(`Sorry, Register failed. Try again.`);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -16,8 +19,10 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {
     const result = await api.login(data);
+    toast.success('Login success!');
     return result;
   } catch (error) {
+    toast.error(`Sorry, login failed. Check email and password. Try again.`);
     return thunkAPI.rejectWithValue(error);
   }
 });
@@ -27,8 +32,10 @@ export const logout = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const result = await api.logout(data);
+      toast.info('Logout success');
       return result;
     } catch (error) {
+      toast.error(`Sorry, register failed. Try again.`);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -40,9 +47,15 @@ export const getCurrentUser = createAsyncThunk(
     try {
       const { auth } = thunkAPI.getState();
       const result = await api.getCurrentUser(auth.token);
+      toast.info('Hello, you are already signed in');
       return result;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(
+        error,
+        toast.error(
+          'Sorry, request failed. May be you have problems with network or token timed out '
+        )
+      );
     }
   },
   {
