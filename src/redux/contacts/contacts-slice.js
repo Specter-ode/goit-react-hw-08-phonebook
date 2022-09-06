@@ -73,5 +73,5 @@ const contactsSlice = createSlice({
     }),
   },
 });
-export const { filterChange, addToFavoriteContacts } = contactsSlice.actions;
+export const { filterChange } = contactsSlice.actions;
 export default contactsSlice.reducer;
